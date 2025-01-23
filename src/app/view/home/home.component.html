@@ -12,15 +12,16 @@
             @for (item of eventList ; track $index){
             <div class="col-3 p-2">
                 <div class="card">
-                    <img class="card-img-top" src="https://dummyimage.com/169x100.png/5fa2dd/ffffff"
+                    <!-- <img class="card-img-top" [src]="item.imageUrl" -->
+                    <img class="card-img-top" [src]="item.imageUrl"
                         alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title">{{item.eventName}}</h5>
 
-                        <a href="#" class="btn btn-primary">Book</a>
+                        <a [routerLink]="['/event/', item.userId]" class="btn btn-primary">Book</a>                       
                     </div>
                 </div>
-            </div>
+            </div> 
             }
 
         </div>

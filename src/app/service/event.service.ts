@@ -1,18 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAPIResponse } from '../model/model';
+import { IEvent } from '../model/model';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  apiurl : string = 'http://localhost:3000/data';
+  private apiurl  = 'http://localhost:3000/events';
 
   constructor(private http : HttpClient) { }
 
   // Get API to getAllEvents
-  getAllEvents() {
-    return this.http.get<IAPIResponse>(`${this.apiurl}`)
+  getAllEvents(): Observable<IEvent[]> {
+    return this.http.get<IEvent[]>(`${this.apiurl}`);
   }
+
+  // Get Api to get Event details by Id
+  // getEventById(userId : number) : Observable<IEvent[]> {
+  //   return this.http.get<IEvent[]>(`${this.apiurl}?userId=${userId}`);
+  // }
+
+  getEventById(userId : number) {
+    return this.http.get<IEvent>(`${this.apiurl}/getEventById?userId=${userId}`).pipe(
+      map((item : any) => {
+        return item.data;
+      })
+    );
+  }
+
+
 }
