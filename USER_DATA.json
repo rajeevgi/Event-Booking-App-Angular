@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "Name": "Steven Smith",
+      "Email": "smith@gmail.com",
+      "Password": "112233",
+      "ContactNo": "7896543210",
+      "Role": "Customer",
+      "id": 1
+    },
+    {
+      "Name": "John Doe",
+      "Email": "john.doe@gmail.com",
+      "Password": "223344",
+      "ContactNo": "9988776655",
+      "Role": "Customer",
+      "id": 2
+    },
+    {
+      "Email": "smith@gmail.com",
+      "Password": "112233",
+      "id": 3
+    },
+    {
+      "Email": "smith@gmail.com",
+      "Password": "112233",
+      "id": 4
+    }
+  ]
+}

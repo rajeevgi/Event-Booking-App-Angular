@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IEvent } from '../model/model';
+import { IAPIResponse, IEvent, User } from '../model/model';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -9,6 +9,8 @@ import { map, Observable } from 'rxjs';
 export class EventService {
 
   private apiurl  = 'http://localhost:3000/events';
+
+  private userApi = 'http://localhost:4000/users';
 
   constructor(private http : HttpClient) { }
 
@@ -23,12 +25,15 @@ export class EventService {
   // }
 
   getEventById(userId : number) {
-    return this.http.get<IEvent>(`${this.apiurl}/getEventById?userId=${userId}`).pipe(
-      map((item : any) => {
-        return item.data;
-      })
-    );
+    return this.http.get<IEvent>(`${this.apiurl}/${userId}`)
   }
 
+  // Post Api to register user 
+  registerUser(obj : User){
+    return this.http.post<IAPIResponse>(`${this.userApi}`, obj);
+  }
 
+  loginUser(){
+    return this.http.get<IAPIResponse>(`${this.userApi}`);
+  }
 }
