@@ -9,57 +9,70 @@ import { EventService } from './service/event.service';
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink, FormsModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'EventApp';
 
   eventService = inject(EventService);
 
-  @ViewChild('model') model !: ElementRef;
+  @ViewChild('model') model!: ElementRef;
 
-  isLoginForm : boolean = false;
+  isLoginForm: boolean = false;
+  userObj: User = new User();
 
-  loginObj : any = {
-    "Email": "",
-    "Password" : ""
+  constructor() {
+    const loggedInUser = localStorage.getItem('User');
+
+    if(loggedInUser != null){
+      this.userObj = JSON.parse(loggedInUser);
+    }
   }
 
-  userObj : User = new User();
-
   openPopUp() {
-    if(this.model){
+    if (this.model) {
       this.model.nativeElement.style.display = 'block';
     }
   }
 
   closePopUp() {
-    if(this.model){
+    if (this.model) {
       this.model.nativeElement.style.display = 'none';
     }
   }
 
   onRegister() {
-    this.eventService.registerUser(this.userObj).subscribe((res : IAPIResponse) => {
-      if(!res.result){
-        alert("Registration Successfull");
-        this.closePopUp();
-      }else {
-        alert(res.message);
-      }
+    this.eventService.registerUser(this.userObj).subscribe({
+      next: (res: IAPIResponse) => {
+        console.log('Register Resposne.', res); // for debugging
+        if (res.result) {
+          alert(res.message);
+          this.closePopUp();
+        } else {
+          alert(res.message);
+        }
+      },
     });
   }
-  
+
   onLogin() {
-    this.eventService.registerUser(this.loginObj).subscribe((res : IAPIResponse) => {
-      if(!res.result){
-        alert("login Successfully");
-        localStorage.getItem('users');
-        this.closePopUp();
-      }else {
-        alert(res.message);
-      }
+    this.eventService.loginUser(this.userObj).subscribe({
+      next: (res: IAPIResponse) => {
+        console.log('login Resposne.', res); // for debugging
+        if (res.result) {
+          alert('Login Successful');
+          localStorage.setItem('user', JSON.stringify(res.data || {})); // avoid storing undefined.
+          this.closePopUp();
+        } else {
+          alert(res.message);
+        }
+      },
     });
   }
-  
+
+  logout() {
+    localStorage.removeItem('user');
+    this.userObj = new User();
+  }
+
 }

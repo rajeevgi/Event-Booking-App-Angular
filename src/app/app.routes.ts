@@ -23,6 +23,11 @@ export const routes: Routes = [
     },
 
     {
+        path : 'app-event',
+        component : EventComponent
+    },
+
+    {
         path : 'app-my-booking',
         component : MyBookingComponent
     }

@@ -1,7 +1,7 @@
 export interface IAPIResponse {
-  message: string;
+  message?: string;
   result: boolean;
-  data: any;
+  data?: any;
 }
 
 export interface IEvent {
@@ -18,6 +18,7 @@ export interface IEvent {
 }
 
 export class User {
+    UserId ?: number;
     Name : string;
     Email : string;
     Password : string;
@@ -29,6 +30,6 @@ export class User {
         this.Email = '';
         this.Password = '';
         this.ContactNo = '';
-        this.Role = 'Customer';
+        this.Role = '';
     }
 }

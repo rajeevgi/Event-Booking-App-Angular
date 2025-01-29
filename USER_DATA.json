@@ -17,14 +17,29 @@
       "id": 2
     },
     {
-      "Email": "smith@gmail.com",
-      "Password": "112233",
+      "Name": "Chris Gayle",
+      "Email": "chris999@gmail.com",
+      "Password": "334455",
+      "ContactNo": "8899776655",
+      "Role": "Cricketer",
       "id": 3
     },
     {
-      "Email": "smith@gmail.com",
-      "Password": "112233",
+      "Name": "John Cena",
+      "Email": "john2000@gmail.com",
+      "Password": "445566",
+      "ContactNo": "7788996655",
+      "Role": "Wrestler",
       "id": 4
+    },
+    {
+      "UserId": 0,
+      "Name": "John Wick",
+      "Email": "john.wick@gmail.com",
+      "Password": "1969",
+      "ContactNo": "9988112233",
+      "Role": "Assession",
+      "id": 5
     }
   ]
 }
